@@ -5,32 +5,31 @@ import {
   AppShell,
   MantineColorsTuple,
   Button,
-  NavLink,
   Accordion,
   createTheme,
   Tabs,
+  Text,
   rem,
   Title,
   BackgroundImage,
   Divider,
-  Paper,
-  Text,
+  Blockquote,
+  Space,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { PieChart } from "@mantine/charts";
 
 import {
   IconBackpack,
-  IconUsersGroup,
   IconPlane,
   IconUserScan,
   IconGlobeFilled,
   IconHome,
-  IconMoneybag,
   IconCalendarEvent,
 } from "@tabler/icons-react";
 import Pakkeliste from "./pakkeliste.tsx";
 import Folka from "./folka.tsx";
+import Før from "./før-du-reiser.tsx";
+import Mens from "./mens-du-reiser.tsx";
 
 const countries = [
   "Kina",
@@ -70,20 +69,13 @@ const theme = createTheme({
   },
 });
 
-const spendingData = [
-  { name: "USA", value: 400, color: "indigo.6" },
-  { name: "India", value: 300, color: "yellow.6" },
-  { name: "Japan", value: 300, color: "teal.6" },
-  { name: "Other", value: 200, color: "gray.6" },
-];
-
 export default function App() {
   const [opened, { toggle }] = useDisclosure();
 
-  // const handleCountryClick = (country: any) => {
-  //   console.log(`Navigating to ${country}`);
-  //   // You can add actual navigation logic here, like using React Router or another method.
-  // };
+  const handleCountryClick = (country: any) => {
+    console.log(`Navigating to ${country}`);
+    // You can add actual navigation logic here, like using React Router or another method.
+  };
 
   return (
     <MantineProvider theme={theme}>
@@ -96,7 +88,7 @@ export default function App() {
         }}
       >
         <AppShell.Header>
-          <BackgroundImage src="images/background2.png" h={320}>
+          <BackgroundImage src="images/background3.jpeg" h={320}>
             {/* <Title order={1}>Reisebois</Title> */}
           </BackgroundImage>
         </AppShell.Header>
@@ -132,8 +124,8 @@ export default function App() {
         </AppShell.Navbar>
 
         <AppShell.Main>
-          <Tabs radius="sm" color="green" defaultValue="hjem" variant="pills">
-            <Tabs.List>
+          <Tabs radius="md" color="green" defaultValue="hjem">
+            <Tabs.List justify="center">
               <Tabs.Tab value="hjem" leftSection={<IconHome style={iconStyle} />}>
                 Hjem
               </Tabs.Tab>
@@ -150,7 +142,7 @@ export default function App() {
                 value="pakkeliste"
                 leftSection={<IconBackpack style={iconStyle} />}
               >
-                Pakkelise
+                Pakkeliste
               </Tabs.Tab>
               <Tabs.Tab value="plan" leftSection={<IconGlobeFilled style={iconStyle} />}>
                 Reiseplanlegger
@@ -158,87 +150,42 @@ export default function App() {
               <Tabs.Tab value="folka" leftSection={<IconUserScan style={iconStyle} />}>
                 Hvem er vi?
               </Tabs.Tab>
+              {/* <Tabs.Tab value="hjem" leftSection={<IconHome style={iconStyle} />}>
+                Land
+              </Tabs.Tab> */}
             </Tabs.List>
-            <Divider my="md" />
+
             <Tabs.Panel value="hjem">
               <Title order={1}>Velkommen!</Title>
-              <Text>Jeg regner med at du har blitt sendt hit av Edvard.</Text>
-              <Paper shadow="sm" p="xl">
-                <Text>Paper is the most basic ui component</Text>
-                <Text>
-                  Use it to create cards, dropdowns, modals and other components that
-                  require background with shadow
-                </Text>
-              </Paper>
-              <Divider my="md" />
+              <Text>WHat is up</Text>
+              <Blockquote
+                color="green"
+                cite="– Leo fra Hvite Gutter"
+                mt="xl"
+                style={{
+                  maxWidth: "600px", // Restricts the maximum width
+                  margin: "0 auto", // Centers it horizontally
+                }}
+              >
+                Hva er det de har vært på? De har vært på sånn... Sånn greie... Når du er
+                rik, og så later du som du er fattig... Backpacking? Backpacking.
+              </Blockquote>
 
-              <Paper shadow="sm" p="xl">
-                <Text>Paper is the most basic ui component</Text>
-                <Text>
-                  Use it to create cards, dropdowns, modals and other components that
-                  require background with shadow
-                </Text>
-              </Paper>
+              <Divider my="md" />
             </Tabs.Panel>
             <Tabs.Panel value="pakkeliste">
               <Pakkeliste />
             </Tabs.Panel>
             <Tabs.Panel value="folka">
+              <Space h="xl"></Space>
               <Folka />
             </Tabs.Panel>
             <Tabs.Panel value="før">
-              <NavLink
-                href="#required-for-focus"
-                label="Reisepartnere"
-                description="Hvem skal du reise med?"
-                leftSection={<IconUsersGroup size="2rem" stroke={1.5} />}
-                childrenOffset={44}
-                defaultOpened
-                // active
-              >
-                <NavLink label="Reise med randoms" href="#required-for-focus" />
-                <NavLink label="Reise med venner" href="#required-for-focus" />
-                <NavLink label="Reise alene" href="#required-for-focus" />
-              </NavLink>
-              <Divider my="md" />
-
-              <NavLink
-                href="#required-for-focus"
-                label="Økonomi"
-                description="Hvordan får du mest verdi for pengene?"
-                leftSection={<IconMoneybag size="2rem" stroke={1.5} />}
-                childrenOffset={44}
-                defaultOpened
-              >
-                <NavLink label="Hva bør jeg budsjettere?" href="#required-for-focus" />
-                <NavLink label="Hvor går pengene hen?">
-                  Hei
-                  <PieChart
-                    withLabelsLine
-                    // labelsPosition="outside"
-                    // labelsType="percent"
-                    // withLabels
-                    data={spendingData}
-                  />
-                </NavLink>
-              </NavLink>
-              <Divider my="md" />
-
-              <NavLink
-                href="#required-for-focus"
-                label="Planlegging"
-                description="Hvor mye av reisen bør du egentlig planlegge?"
-                leftSection={<IconPlane size="2rem" stroke={1.5} />}
-                childrenOffset={44}
-                defaultOpened
-              >
-                <NavLink label="Reiserute" href="#required-for-focus" />
-                <NavLink label="Flybilletter" href="#required-for-focus" />
-                <NavLink label="Når på året bør du reise?" href="#required-for-focus" />
-              </NavLink>
-              <Divider my="md" />
+              <Før />
             </Tabs.Panel>
-            <Tabs.Panel value="mens">Hallai</Tabs.Panel>
+            <Tabs.Panel value="mens">
+              <Mens />
+            </Tabs.Panel>
           </Tabs>
         </AppShell.Main>
         {/* <AppShell.Footer>
