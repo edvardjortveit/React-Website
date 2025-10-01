@@ -40,3 +40,28 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Floating back button for mobile */
+@media (max-width: 768px) {
+  .floating-back-btn {
+    display: block !important;
+  }
+}
+
+/* Breadcrumb hover effects */
+.breadcrumb-link:hover {
+  text-decoration: underline !important;
+}
+
+/* Image thumbnail hover effects */
+.image-thumbnail:hover {
+  transform: scale(1.05);
+  border-color: #2bdd4c !important;
+}
+
+/* Floating back button for mobile */
+@media (max-width: 768px) {
+  .floating-back-btn {
+    display: block !important;
+  }
+}
